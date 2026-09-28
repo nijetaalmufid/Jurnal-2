@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        label {
+            width: 200px;
+            font-weight: normal;
+        }
+        input[type="text"], select, textarea {
+            padding: 5px;
+            font-size: 14px;
+            width: 250px;
+        }
+        input[type="date"] {
+            padding: 4px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+            height: 60px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .checkbox-group {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        .button-group {
+            margin-top: 15px;
+            margin-left: 200px;
+        }
+        button {
+            padding: 5px 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Data Mahasiswa</h2>
+
+    <form id="mahasiswaForm" onsubmit="return validateForm(event)">
+        <!-- 1. NIM -->
+        <div class="form-group">
+            <label for="nim">NIM :</label>
+            <input type="text" id="nim" name="nim" required>
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group">
+            <label for="nama">Nama :</label>
+            <input type="text" id="nama" name="nama" required>
+        </div>
+
+        <!-- 2. Tanggal Lahir -->
+        <div class="form-group">
+            <label for="tgl_lahir">Tgl Lahir (dd-mm-yyyy) :</label>
+            <input type="date" id="tgl_lahir" name="tgl_lahir" required>
+        </div>
+
+        <!-- 3. Jenis Kelamin -->
+        <div class="form-group">
+            <label>Jenis Kelamin :</label>
+            <div class="radio-group">
+                <label><input type="radio" name="jenis_kelamin" value="Laki-Laki" required> Laki-Laki</label>
+                <label><input type="radio" name="jenis_kelamin" value="Perempuan" required> Perempuan</label>
+            </div>
+        </div>
+
+        <!-- 4. Alamat di Bandung -->
+        <div class="form-group">
+            <label for="alamat">Alamat di Bandung :</label>
+            <textarea id="alamat" name="alamat" required></textarea>
+        </div>
+
+        <!-- 5. Tinggal di -->
+        <div class="form-group">
+            <label for="tinggal_di">Tinggal di :</label>
+            <select id="tinggal_di" name="tinggal_di" required>
+                <option value="">--pilih--</option>
+                <option value="Kos/kontrakan">Kos/kontrakan</option>
+                <option value="Rumah saudara">Rumah saudara</option>
+                <option value="Rumah orang tua">Rumah orang tua</option>
+            </select>
+        </div>
+
+        <!-- 6. Hobi (Checkbox dengan validasi tepat 2 pilihan) -->
+        <div class="form-group">
+            <label>Pilih 2 hobi yang paling disukai :</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="hobi" value="Science"> Science</label>
+                <label><input type="checkbox" name="hobi" value="Technology"> Technology</label>
+                <label><input type="checkbox" name="hobi" value="Art"> Art</label>
+                <label><input type="checkbox" name="hobi" value="Sport"> Sport</label>
+            </div>
+        </div>
+
+        <!-- 7. Tombol Submit dan Reset -->
+        <div class="button-group">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+
+    <script>
+        function validateForm(event) {
+            // Mengambil semua checkbox hobi yang dicentang
+            const checkboxes = document.querySelectorAll('input[name="hobi"]:checked');
+            
+            // Ketentuan: Pengguna diminta memilih dua yang paling disukai
+            if (checkboxes.length !== 2) {
+                alert("Harap pilih tepat 2 hobi yang paling disukai!");
+                event.preventDefault(); // Mencegah form terkirim
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+</html>
